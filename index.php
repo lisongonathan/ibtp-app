@@ -35,6 +35,7 @@ try{
 			
 		} elseif (isset($_GET['section'])) {
 			$_SESSION['infoSection'] = (int) $_GET['section'];
+			
 			$_SESSION['nom_section'] = (int) $_GET['section'];
 			//Gestion cotes
 			finance();
@@ -96,7 +97,7 @@ try{
 
 		} elseif (isset($_GET['print_recettes'])) {
 			printRecettes($_GET['print_recettes'], $_GET['debut'], $_GET['fin']);
-			
+
 		} else {
 			//Page d'acceuil
 			dashboard();
