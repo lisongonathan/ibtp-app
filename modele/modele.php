@@ -1213,7 +1213,8 @@ function getPromosListTitulaire($titulaire){
 				WHERE matiere.id_titulaire = ?) AS dTit
 			INNER JOIN promotion ON promotion.id = dTit.id_promotion) AS dPromo
 		INNER JOIN niveau ON dPromo.id_niveau = niveau.id) AS dListPromo
-	INNER JOIN section ON section.id = dListPromo.id_section");
+	INNER JOIN section ON section.id = dListPromo.id_section
+	GROUP BY id");
 
 	//Data utilisateur
 	$req -> execute(array($titulaire));
