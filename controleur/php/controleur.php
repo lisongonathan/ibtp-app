@@ -261,7 +261,7 @@ function dashboard(){
 
         //Liste des rubriques
         $liste_rubriques = getAllRubriques();
-        
+
         //Liste des frais academique
         $liste_frais = getAllFrais();    
     }
@@ -384,6 +384,24 @@ function dashboard(){
         $liste_finances = getAllFinances();
     }
 
+    if ($_SESSION['module'] == 'Section') {
+        $etudiants = getStudensBySection($_SESSION['id']);
+        $totalEtudiants = 0;
+
+        $totalS1 = 0;
+
+        $totalS2 = 0;
+
+        //Participants Examens
+        foreach ($etudiants as $key => $value) {
+            if ($value['']) {
+                # code...
+            } else {
+                # code...
+            }
+            
+        }
+    }
 
 	//Lien vue - controleur
 	require "vue/pages/dashboard.php";
@@ -694,7 +712,6 @@ function printRecettes($rubrique, $debut, $fin){
 
     $etudiants = getStudentsByLevel($infosRecette['intitule']);
 
-
     $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('vue/gabarit/assets/template_recettes_niveaux.xlsx');
         
     $worksheet = $spreadsheet->getActiveSheet();
@@ -788,6 +805,74 @@ function printRecettes($rubrique, $debut, $fin){
 
     $worksheet->getCell('D13')->setValue($impression);
         
+    header('Content-Disposition: attachment;filename=RAPPORT_RECETTES_'.time().'.xlsx');
+
+    $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+    $writer->save('php://output');
+
+    exit;
+}
+
+function printDepenses($rubrique, $debut, $fin){
+    header('Content-Type: application/vnd.ms-excel; charset=utf-8');  
+
+    $pattern_date = explode('/', $debut);
+    $debut = $pattern_date[2] . '-' . $pattern_date[0] . '-' . $pattern_date[1];
+
+    
+    $pattern_date = explode('/', $fin);
+    $fin = $pattern_date[2] . '-' . $pattern_date[0] . '-' . $pattern_date[1];
+    
+    $dataQ = array(
+        'debut' => $debut,
+        'fin' => $fin,
+        'rubrique' => $rubrique
+    );
+    $etudiants = getStudentsByLevel($infosRecette['intitule']);
+
+    $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load('vue/gabarit/assets/template_recettes_niveaux.xlsx');
+        
+    $worksheet = $spreadsheet->getActiveSheet();
+
+    //INFOS RAPPORT
+    //1.DESIGNATION
+    $infos_frais = getFrais($dataQ['rubrique']);
+
+    //2.CIBLE
+
+    //3.NOMBRES DE PROMOTIONS
+
+    //4.EFFECTIFS ETUDIANT
+
+    //5.CAISSE
+
+    //DETAILS RAPPORT
+    //1.N° LIGNE
+
+    //2.DATE DEPENSE
+
+    //3.LIBELLE
+
+    //4.OP
+
+    //5.IMPUTATION
+
+    //6.MONTANT
+
+    //INFOS RUBRIQUE
+    //1.DATE DEBUT
+
+    //2.DATE FIN
+
+    //3.DATE IMPRESSION
+
+    $t = time();
+    
+    $impression = 'MATADI, LE ' . date("d-m-Y",$t);
+
+    //4.NOMBRES DEPENSES
+
+    //5.TOTAL DEPENSES
     header('Content-Disposition: attachment;filename=test_'.time().'.xlsx');
 
     $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');

@@ -289,7 +289,6 @@
                             </div>
                         </div>
                     </div>
-
         <?php
             }
         ?>
@@ -300,7 +299,6 @@
         } else {
         ?>
             <h2>Aucune information</h2>
-
         <?php
         }
         ?>

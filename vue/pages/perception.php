@@ -20,7 +20,7 @@
                                     </tr>
                                 <?php
                                 foreach ($detail_rubrique as $key => $value) {
-                                    $soldeEtudiant = getSoldeOfEtudiant($value['id']);
+                                    $soldeEtudiant = getSoldeOfEtudiant($value['id'], $id);
                                 ?>
                                 <tr>
                                     <td><?= $key+1 ?></td>

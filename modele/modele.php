@@ -86,6 +86,24 @@ function getStudentsByPromo($id){
 	return $req -> fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getStudentsBySection($id){
+	//Connexion BD
+	$bdd = getBdd();
+
+	//Authentification
+	$req = $bdd -> prepare("SELECT etudiant.* 
+	FROM etudiant
+	INNER JOIN promotion ON promotion.id = etudiant.id_promotion
+	WHERE promotion.id_section= ?
+	");
+
+	//Data utilisateur
+	$req -> execute(array($id));
+
+	//Data BD
+	return $req -> fetchAll(PDO::FETCH_ASSOC);
+}
+
 function getStudentByRubrique($id){
 	//Connexion BD
 	$bdd = getBdd();
@@ -3082,6 +3100,25 @@ function getAllOperateurs(){
 
 	//Data BD
 	return $req -> fetchAll(PDO::FETCH_ASSOC);
+
+}
+
+function getFrais($id){
+
+	//Connexion BD
+	$bdd = getBdd();
+    
+    //Effectif Section
+	$req = $bdd -> prepare("SELECT id, designation
+							FROM frais_academique
+							WHERE id = ?
+	");
+
+	//Data utilisateur
+	$req -> execute(array($id));
+
+	//Data BD
+	return $req -> fetch(PDO::FETCH_ASSOC);
 
 }
 
