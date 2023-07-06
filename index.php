@@ -43,10 +43,13 @@ try{
 			//Gestion cotes
 			if ($_GET['releve'] == 1) {
 				bulletin(1);
+
 			} elseif ($_GET['releve'] == 2) {
 				bulletin(2);
+
 			} else {
 				erreur("Page Inexistant");
+
 			}
 		} elseif (isset($_GET['sgac'])) {
 			//Gestion authorisation
@@ -93,6 +96,7 @@ try{
 
 		} elseif (isset($_GET['print_recettes'])) {
 			printRecettes($_GET['print_recettes'], $_GET['debut'], $_GET['fin']);
+			
 		} else {
 			//Page d'acceuil
 			dashboard();
