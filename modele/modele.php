@@ -4,8 +4,8 @@
 function getBdd(){
 	//Instancie l'objet PDO associé
 	$bdd = new PDO(
-			'mysql:host=mysql-ibtp-matadi.alwaysdata.net;dbname=ibtp-matadi_data',
-			'315933',
+			'mysql:host=localhost;dbname=ibtp-matadi_data',
+			'admin',
 			'mot2p@sse'
 		);
 
